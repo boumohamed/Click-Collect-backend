@@ -4,10 +4,14 @@ import com.pfa.clickandcollect.Entities.Categorie;
 import com.pfa.clickandcollect.Entities.Produit;
 import com.pfa.clickandcollect.Repositories.CategorieRepository;
 import com.pfa.clickandcollect.Repositories.ProduitRepository;
+import com.pfa.clickandcollect.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -19,9 +23,19 @@ public class ClickAndCollectApplication implements CommandLineRunner {
 
     @Autowired
     private CategorieRepository categorieRepository;
+
+    @Autowired
+    private SecurityService securityService;
+
+
     public static void main(String[] args) {
         SpringApplication.run(ClickAndCollectApplication.class, args);
 
+
+    }
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return  new BCryptPasswordEncoder();
     }
 
     @Override
@@ -36,20 +50,36 @@ public class ClickAndCollectApplication implements CommandLineRunner {
             System.out.println(c.getId());
         });
 
-        produitRepository.save(new Produit(null, "BigMag 1", 40.0, "desc 1", "image 1",
-                categorieRepository.findById(1L).get()));
-        produitRepository.save(new Produit(null, "BigMag 2", 50.0, "desc 2", "image 2",
-                categorieRepository.findById(2L).get()));
+
+
+
+
+
+        securityService.saveNewUser("ayoub", "ayoub", "ayoub");
+        securityService.saveNewUser("hicham", "hicham", "hicham");
+        securityService.saveNewUser("mohamed", "mohamed", "mohamed");
+
+        securityService.saveNewRole("USER", "utilisateur simple");
+        securityService.saveNewRole("MANAGER", "utilisateur simple");
+        securityService.saveNewRole("ADMIN", "Administrateur de l'application");
+
+
+        securityService.addRoleToUser("ayoub", "USER");
+        securityService.addRoleToUser("hicham", "USER");
+        securityService.addRoleToUser("mohamed", "USER");
+
+        securityService.addRoleToUser("hicham", "ADMIN");
+        securityService.addRoleToUser("mohamed", "MANAGER");
 
         produitRepository.findAll().forEach(p -> {
-            System.out.println(p.getCat().getDesignation());
+            System.out.println(p.getNomPrd());
         });
 
-
-
-
-
     }
+
+
+
 }
+
 
 

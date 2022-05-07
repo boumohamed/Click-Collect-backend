@@ -17,7 +17,10 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
+
 @CrossOrigin(origins = "*")
+=======
+
 public class ServiceProduct {
     @Autowired
     private ProduitRepository produitRepository;

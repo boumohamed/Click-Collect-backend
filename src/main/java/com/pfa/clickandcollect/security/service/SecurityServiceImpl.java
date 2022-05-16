@@ -9,26 +9,26 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
 
-@Service
-@Slf4j
-@Transactional
-public class SecurityServiceImpl implements SecurityService {
+//@Service
+//@Slf4j
+//@Transactional
+public class SecurityServiceImpl  {
     @Autowired
     private AppUserRepository userRepo;
     @Autowired
     private AppRoleRepository roleRepo;
-    @Autowired
+    /*@Autowired
     private PasswordEncoder pe;
-
-    @Override
+*/
+   /* @Override
     public AppUser saveNewUser(String username, String password, String passwordV) {
         if (!password.equals(passwordV)) throw new RuntimeException("Password not match !");
         String PasswordEncoded = pe.encode(password);
@@ -39,9 +39,9 @@ public class SecurityServiceImpl implements SecurityService {
         user.setActive(true);
         AppUser savedUser = userRepo.save(user);
         return savedUser;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public AppRole saveNewRole(String role, String description) {
 
         AppRole Role = roleRepo.findByRole(role);
@@ -77,6 +77,6 @@ public class SecurityServiceImpl implements SecurityService {
     public AppUser loadUserByUsername(String username) {
         AppUser User = userRepo.findByUsername(username);
         return User;
-    }
+    }*/
 
 }

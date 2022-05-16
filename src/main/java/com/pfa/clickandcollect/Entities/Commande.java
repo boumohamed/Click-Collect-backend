@@ -1,5 +1,6 @@
 package com.pfa.clickandcollect.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,5 +29,9 @@ public class Commande {
     private Date date_reception;
 
     @ManyToMany()
+    @JsonBackReference
     private Collection<Produit> produits;
+
+    @ManyToOne
+    private Client client;
 }

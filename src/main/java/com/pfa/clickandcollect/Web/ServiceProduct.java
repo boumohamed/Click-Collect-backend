@@ -50,7 +50,7 @@ public class ServiceProduct {
 
             ) throws  Exception{
 
-        System.out.println(file.getBytes());
+        //System.out.println(file.getBytes());
         Produit produit = new Produit();
         produit.setCat(categorieRepository.findById(categorie).orElse(null));
         produit.setNomPrd(nomPrd);
